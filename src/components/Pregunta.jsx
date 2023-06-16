@@ -1,4 +1,4 @@
-import { Avatar, Box, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Stack, Tooltip, Typography } from "@mui/material";
 import React from "react";
 
 // import Paper from "@material-ui/core/Paper";
@@ -18,20 +18,18 @@ import React from "react";
 //   },
 // }));
 
-const Mensaje = ({ mensaje, urlAvatar }) => {
-  console.log("El url del avatar es:", urlAvatar);
+const Pregunta = ({ pregunta }) => {
   //   const classes = useStyles();
 
   return (
     // <Paper className={classes.box}>
     <Box>
       <Stack direction="row">
-        <Avatar src={urlAvatar} sx={{ mx: 1, my: "auto" }}></Avatar>
         <Box
           sx={{
             width: "100%",
             height: "5%",
-            mr: "15%",
+            ml: "15%",
           }}
         >
           <Typography
@@ -42,9 +40,17 @@ const Mensaje = ({ mensaje, urlAvatar }) => {
               backgroundColor: "#E0E0E0", // Ajusta el color de fondo según tus preferencias
             }}
           >
-            {mensaje}
+            {pregunta}
           </Typography>
         </Box>
+        <Tooltip title="Tú">
+          <Avatar
+            src={
+              "https://th.bing.com/th/id/OIP.04D0YadWF5JBe1MuS4DxugHaHa?pid=ImgDet&rs=1"
+            }
+            sx={{ mx: 1, my: "auto" }}
+          ></Avatar>
+        </Tooltip>
       </Stack>
 
       <br />
@@ -53,4 +59,4 @@ const Mensaje = ({ mensaje, urlAvatar }) => {
   );
 };
 
-export default Mensaje;
+export default Pregunta;

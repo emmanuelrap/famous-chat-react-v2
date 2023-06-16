@@ -11,11 +11,9 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 
 function App() {
   const [message, setMessage] = useState("");
-  const [mensajes, setMensajes] = useState([]);
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const [mensajesGuardados, setMensajesGuardados] = useState([]);
-
   const [mensajesFavoritos, setMensajesFavoritos] = useState([]);
   const [preguntasGuardadas, setPreguntasGuardadas] = useState([]);
   const sugerencias = [
@@ -33,6 +31,18 @@ function App() {
 
   useEffect(() => {
     setSugerenciaMostrar(sugerencias[0]);
+    // if (localStorage.getItem("mensajesGuardados") !== null) {
+    //   setMensajesGuardados(
+    //     JSON.parse(localStorage.getItem("mensajesGuardados"))
+    //   );
+    // } else {
+    //   setMensajesGuardados([]);
+    // }
+
+    // if (localStorage.getItem("mensajesFavoritos") !== null) {
+    //   setMensajesFavoritos([]);
+    // }
+
     ejecutarCada5Segundos();
   }, []);
 
@@ -43,16 +53,8 @@ function App() {
     }, 5000);
   }
 
-  async function callOpenAIAPI({ famosoSel }) {
-    console.log("mensajes:", mensajes);
-    //Mandar mi pregunta al chat
-    const nuevaPregunta = {
-      key: uuidv4(),
-      mensaje: message,
-      tipoMensaje: "pregunta",
-    };
-    setMensajes([...mensajes, nuevaPregunta]);
-
+  async function callOpenAIAPI() {
+    setPreguntasGuardadas([...mensajesGuardados, message]);
     console.log("Calling the OpenAI API");
     setResponse("Se está Procesando tu pregunta, espera unos segundos más...");
     setLoading(true);
@@ -80,16 +82,14 @@ function App() {
       })
       .then((data) => {
         console.log(data);
-        const respuesta = {
+        const nuevoMensaje = {
           key: uuidv4(),
+          keypregunta: uuidv4(),
           mensaje: data.choices[0].text.trim(),
-          urlAvatar: famosoSel.urlAvatar,
-          tipoMensaje: "respuesta",
+          pregunta: message,
+          urlAvatar: localStorage.getItem("urlAvatar"),
         };
-        let arreglo = mensajes;
-        arreglo.push(nuevaPregunta);
-        arreglo.push(respuesta);
-        setMensajes(arreglo);
+        setMensajesGuardados([...mensajesGuardados, nuevoMensaje]);
         setLoading(false);
       });
   }
@@ -110,7 +110,7 @@ function App() {
           alignItems: "center",
         }}
       >
-        {mensajes == 0 && (
+        {mensajesGuardados == 0 && (
           <Box
             sx={{
               display: "flex",
@@ -122,18 +122,15 @@ function App() {
             <h2>¡ Chatea Con tus Famosos Favoritos ! </h2>
           </Box>
         )}
-        {mensajes.map((mensaje) => (
+        {mensajesGuardados.map((mensaje) => (
           <>
-            {console.log(">>>> mensaje", mensaje)}
-            {mensaje.tipoMensaje == "pregunta" ? (
-              <Pregunta key={mensaje.key} pregunta={mensaje.mensaje} />
-            ) : (
-              <Mensaje
-                key={mensaje.key}
-                mensaje={mensaje.mensaje}
-                urlAvatar={mensaje.urlAvatar}
-              />
-            )}
+            {console.log("mensajesGuardados>>", mensajesGuardados)}
+            <Pregunta key={mensaje.keypregunta} pregunta={mensaje.pregunta} />
+            <Mensaje
+              key={mensaje.key}
+              mensaje={mensaje.mensaje}
+              urlAvatar={mensaje.urlAvatar}
+            />
           </>
         ))}
       </Box>
