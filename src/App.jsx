@@ -33,6 +33,18 @@ function App() {
 
   useEffect(() => {
     setSugerenciaMostrar(sugerencias[0]);
+    // if (localStorage.getItem("mensajesGuardados") !== null) {
+    //   setMensajesGuardados(
+    //     JSON.parse(localStorage.getItem("mensajesGuardados"))
+    //   );
+    // } else {
+    //   setMensajesGuardados([]);
+    // }
+
+    // if (localStorage.getItem("mensajesFavoritos") !== null) {
+    //   setMensajesFavoritos([]);
+    // }
+
     ejecutarCada5Segundos();
   }, []);
 
@@ -43,7 +55,7 @@ function App() {
     }, 5000);
   }
 
-  async function callOpenAIAPI({ famosoSel }) {
+  async function callOpenAIAPI() {
     console.log("mensajes:", mensajes);
     //Mandar mi pregunta al chat
     const nuevaPregunta = {
@@ -83,7 +95,7 @@ function App() {
         const respuesta = {
           key: uuidv4(),
           mensaje: data.choices[0].text.trim(),
-          urlAvatar: famosoSel.urlAvatar,
+          urlAvatar: localStorage.getItem("urlAvatar"),
           tipoMensaje: "respuesta",
         };
         let arreglo = mensajes;

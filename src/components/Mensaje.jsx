@@ -19,7 +19,6 @@ import React from "react";
 // }));
 
 const Mensaje = ({ mensaje, urlAvatar }) => {
-  console.log("El url del avatar es:", urlAvatar);
   //   const classes = useStyles();
 
   return (

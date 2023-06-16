@@ -24,13 +24,13 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
   ];
   //   localStorage.setItem("famoso", famosos[0]);
   //   localStorage.setItem("urlAvatar", urls[0]);
-  setFamosoSel({ famoso: famosos[0], urlAvatar: urls[0] });
+  // setFamosoSel({ famoso: famosos[0], urlAvatar: urls[0] });
 
   const [isSelected, setIsSelected] = useState(7);
   const handleClick = (seleccion) => {
     // localStorage.setItem("famoso", famosos[seleccion]);
     // localStorage.setItem("urlAvatar", urls[seleccion]);
-    setFamosoSel({ famoso: famosos[seleccion], urlAvatar: urls[seleccion] });
+    //setFamosoSel({ famoso: famosos[seleccion], urlAvatar: urls[seleccion] });
     setIsSelected(seleccion);
   };
   // 0 Albert Einstein
