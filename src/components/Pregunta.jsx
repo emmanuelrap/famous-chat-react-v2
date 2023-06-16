@@ -18,9 +18,7 @@ import React from "react";
 //   },
 // }));
 
-const Pregunta = ({ pregunta }) => {
-  //   const classes = useStyles();
-
+const Pregunta = ({ mensaje }) => {
   return (
     // <Paper className={classes.box}>
     <Box>
@@ -40,7 +38,7 @@ const Pregunta = ({ pregunta }) => {
               backgroundColor: "#E0E0E0", // Ajusta el color de fondo según tus preferencias
             }}
           >
-            {pregunta}
+            {mensaje.mensaje}
           </Typography>
         </Box>
         <Tooltip title="Tú">

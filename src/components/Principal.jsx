@@ -16,12 +16,6 @@ function Principal() {
   const [loading, setLoading] = useState(false);
   const [mensajesGuardados, setMensajesGuardados] = useState([]);
 
-  const [mensajePrueba, setMensajePrueba] = useState({
-    mensaje: "Hola",
-    urlAvatar:
-      "https://www.thefamouspeople.com/profiles/images/leonardo-da-vinci-6.jpg",
-  });
-
   const [mensajesFavoritos, setMensajesFavoritos] = useState([]);
   const [preguntasGuardadas, setPreguntasGuardadas] = useState([]);
   const sugerencias = [
@@ -56,7 +50,7 @@ function Principal() {
       mensaje: message,
       tipoMensaje: "pregunta",
     };
-    // setMensajes([...mensajes, nuevaPregunta]);
+    setMensajes([...mensajes, nuevaPregunta]);
 
     // setResponse("Se está Procesando tu pregunta, espera unos segundos más...");
     setLoading(true);
@@ -115,7 +109,7 @@ function Principal() {
           alignItems: "center",
         }}
       >
-        {/* {mensajes.length == 0 && (
+        {mensajes.length == 0 && (
           <Box
             sx={{
               display: "flex",
@@ -127,24 +121,11 @@ function Principal() {
             <h2>¡ Chatea Con tus Famosos Favoritos ! </h2>
           </Box>
         )}
-        {mensajes.length != 0 &&
-          mensajes.map((mensaje) => (
-            <>
-              {console.log(">>>> mensaje", mensaje)}
-              {mensaje.tipoMensaje == "pregunta" ? (
-                <Pregunta key={mensaje.key} pregunta={mensaje.mensaje} />
-              ) : (
-                <Mensaje
-                  key={mensaje.key}
-                  mensaje={mensaje.mensaje}
-                  urlAvatar={mensaje.urlAvatar}
-                />
-              )}
-            </>
-          ))} */}
-        <Mensaje mensaje={mensajePrueba} />;
+
         {mensajes.map((mensaje) => {
-          return <Mensaje mensaje={mensaje} />;
+          if (mensaje.tipoMensaje == "pregunta")
+            return <Pregunta mensaje={mensaje} />;
+          else return <Mensaje mensaje={mensaje} />;
         })}
       </Box>
       <TextField
