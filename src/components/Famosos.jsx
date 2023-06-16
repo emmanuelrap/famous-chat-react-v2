@@ -2,7 +2,7 @@ import { Avatar, IconButton, Stack, Toolbar, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 const Famosos = ({ famosoSel, setFamosoSel }) => {
-  const [isSelected, setIsSelected] = useState(7);
+  const [isSelected, setIsSelected] = useState(0);
   const famosos = [
     "Albert Einstein",
     "Leonardo da Vinci",
