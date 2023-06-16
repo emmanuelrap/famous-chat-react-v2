@@ -122,6 +122,7 @@ function Principal({ famosoSel }) {
       <Box
         sx={{
           overflow: "auto",
+          "&::-webkit-scrollbar": { display: "none" },
           padding: 2,
           width: "100%",
           height: "80%",
