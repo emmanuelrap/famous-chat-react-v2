@@ -19,19 +19,18 @@ import React from "react";
 // }));
 
 const Mensaje = ({ mensaje }) => {
-  console.log("El mensaje de Mensaje es:", mensaje);
+  // console.log("El mensaje de Mensaje es:", mensaje);
   //   const classes = useStyles();
 
   return (
     // <Paper className={classes.box}>
     <Box>
       <Stack direction="row">
-        <Avatar src={mensaje.urlAvatar} sx={{ mx: 1, my: "auto" }}></Avatar>
         <Box
           sx={{
             width: "100%",
             height: "5%",
-            mr: "15%",
+            ml: "15%",
           }}
         >
           <Typography
@@ -45,6 +44,7 @@ const Mensaje = ({ mensaje }) => {
             {mensaje.mensaje}
           </Typography>
         </Box>
+        <Avatar src={mensaje.urlAvatar} sx={{ mx: 1, my: "auto" }}></Avatar>
       </Stack>
 
       <br />

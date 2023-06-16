@@ -23,11 +23,19 @@ const Pregunta = ({ mensaje }) => {
     // <Paper className={classes.box}>
     <Box>
       <Stack direction="row">
+        <Tooltip title="Tú">
+          <Avatar
+            src={
+              "https://th.bing.com/th/id/OIP.04D0YadWF5JBe1MuS4DxugHaHa?pid=ImgDet&rs=1"
+            }
+            sx={{ mx: 1, my: "auto" }}
+          ></Avatar>
+        </Tooltip>
         <Box
           sx={{
             width: "100%",
             height: "5%",
-            ml: "15%",
+            mr: "15%",
           }}
         >
           <Typography
@@ -41,14 +49,6 @@ const Pregunta = ({ mensaje }) => {
             {mensaje.mensaje}
           </Typography>
         </Box>
-        <Tooltip title="Tú">
-          <Avatar
-            src={
-              "https://th.bing.com/th/id/OIP.04D0YadWF5JBe1MuS4DxugHaHa?pid=ImgDet&rs=1"
-            }
-            sx={{ mx: 1, my: "auto" }}
-          ></Avatar>
-        </Tooltip>
       </Stack>
 
       <br />

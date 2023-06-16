@@ -3,21 +3,33 @@ import { v4 as uuidv4 } from "uuid";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import InputAdornment from "@mui/material/InputAdornment";
-import { Box, CircularProgress, TextField } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Switch,
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import Mensaje from "./Mensaje";
 import Pregunta from "./Pregunta";
-
 const API_KEY = import.meta.env.VITE_API_KEY;
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { styled } from "@mui/system";
 
-function Principal() {
+const StyledLabel = styled("span")({
+  marginRight: "0.5rem",
+});
+
+function Principal({ famosoSel }) {
   const [message, setMessage] = useState("");
   const [mensajes, setMensajes] = useState([]);
-  const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
-  const [mensajesGuardados, setMensajesGuardados] = useState([]);
+  const [tipoResp, setTipoRes] = useState("Respuesta Rápida");
+  const [tipoModelo, setTipoModelo] = useState("text-davinci-002");
 
   const [mensajesFavoritos, setMensajesFavoritos] = useState([]);
-  const [preguntasGuardadas, setPreguntasGuardadas] = useState([]);
+
   const sugerencias = [
     "Hazme una Pregunta.",
     "¿quieres reír? ¡Pídeme un chiste!",
@@ -41,6 +53,15 @@ function Principal() {
       setSugerenciaMostrar(sugerencias[randomNumber]);
     }, 5000);
   }
+  async function handleChangeTypeResp() {
+    if (tipoResp == "Respuesta Detallada") {
+      setTipoRes("Respuesta Rápida");
+      setTipoModelo("text-davinci-002");
+    } else {
+      setTipoRes("Respuesta Detallada");
+      setTipoModelo("text-davinci-003");
+    }
+  }
 
   async function callOpenAIAPI() {
     console.log("mensajes:", mensajes);
@@ -56,10 +77,14 @@ function Principal() {
     setLoading(true);
 
     const APIBody = {
-      model: "text-davinci-003",
-      prompt: message,
+      model: tipoModelo,
+      prompt:
+        "Quiero que me contestes como si tú fueras" +
+        famosoSel.nombre +
+        "Esta es mi pregunta:" +
+        message,
       temperature: 0,
-      max_tokens: 200,
+      max_tokens: 300,
       top_p: 1.0,
       frequency_penalty: 0.0,
       presence_penalty: 0.0,
@@ -81,8 +106,7 @@ function Principal() {
         const respuesta = {
           key: uuidv4(),
           mensaje: data.choices[0].text.trim(),
-          urlAvatar:
-            "https://th.bing.com/th/id/OIP.1MrXVIq7cDw-lOFQhVQ5YQHaKh?pid=ImgDet&rs=1",
+          urlAvatar: famosoSel.urlAvatar,
           tipoMensaje: "respuesta",
         };
         let arreglo = mensajes;
@@ -97,6 +121,7 @@ function Principal() {
     <Box sx={{ width: "100%", height: "100%" }}>
       <Box
         sx={{
+          overflow: "auto",
           padding: 2,
           width: "100%",
           height: "80%",
@@ -137,7 +162,16 @@ function Principal() {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton edge="end" onClick={callOpenAIAPI} disabled={loading}>
+              <FormControlLabel
+                control={<Switch onChange={handleChangeTypeResp} />}
+                label={<StyledLabel>{tipoResp}</StyledLabel>}
+              />
+              <IconButton
+                edge="end"
+                onClick={callOpenAIAPI}
+                disabled={loading}
+                sx={{ mr: 2 }}
+              >
                 {loading ? <CircularProgress size={25} /> : <SendIcon />}
               </IconButton>
             </InputAdornment>
