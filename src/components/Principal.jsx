@@ -79,9 +79,9 @@ function Principal({ famosoSel }) {
     const APIBody = {
       model: tipoModelo,
       prompt:
-        "Quiero que me contestes como si tú fueras" +
+        "Quiero que me respondas a mi pregunta o comentario como si tú fueras" +
         famosoSel.nombre +
-        "Esta es mi pregunta:" +
+        ":" +
         message,
       temperature: 0,
       max_tokens: 300,
