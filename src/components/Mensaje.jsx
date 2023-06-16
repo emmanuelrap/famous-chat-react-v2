@@ -18,14 +18,15 @@ import React from "react";
 //   },
 // }));
 
-const Mensaje = ({ mensaje, urlAvatar }) => {
+const Mensaje = ({ mensaje }) => {
+  console.log("El mensaje de Mensaje es:", mensaje);
   //   const classes = useStyles();
 
   return (
     // <Paper className={classes.box}>
     <Box>
       <Stack direction="row">
-        <Avatar src={urlAvatar} sx={{ mx: 1, my: "auto" }}></Avatar>
+        <Avatar src={mensaje.urlAvatar} sx={{ mx: 1, my: "auto" }}></Avatar>
         <Box
           sx={{
             width: "100%",
@@ -41,7 +42,7 @@ const Mensaje = ({ mensaje, urlAvatar }) => {
               backgroundColor: "#E0E0E0", // Ajusta el color de fondo según tus preferencias
             }}
           >
-            {mensaje}
+            {mensaje.mensaje}
           </Typography>
         </Box>
       </Stack>

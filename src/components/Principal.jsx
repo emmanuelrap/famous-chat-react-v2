@@ -4,16 +4,24 @@ import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Box, CircularProgress, TextField } from "@mui/material";
-import Mensaje from "./components/Mensaje";
-import Pregunta from "./components/Pregunta";
+import Mensaje from "./Mensaje";
+import Pregunta from "./Pregunta";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-function App() {
+function Principal() {
   const [message, setMessage] = useState("");
+  const [mensajes, setMensajes] = useState([]);
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const [mensajesGuardados, setMensajesGuardados] = useState([]);
+
+  const [mensajePrueba, setMensajePrueba] = useState({
+    mensaje: "Hola",
+    urlAvatar:
+      "https://www.thefamouspeople.com/profiles/images/leonardo-da-vinci-6.jpg",
+  });
+
   const [mensajesFavoritos, setMensajesFavoritos] = useState([]);
   const [preguntasGuardadas, setPreguntasGuardadas] = useState([]);
   const sugerencias = [
@@ -30,23 +38,10 @@ function App() {
   const [sugerenciaMostrar, setSugerenciaMostrar] = useState("");
 
   useEffect(() => {
-    setSugerenciaMostrar(sugerencias[0]);
-    // if (localStorage.getItem("mensajesGuardados") !== null) {
-    //   setMensajesGuardados(
-    //     JSON.parse(localStorage.getItem("mensajesGuardados"))
-    //   );
-    // } else {
-    //   setMensajesGuardados([]);
-    // }
-
-    // if (localStorage.getItem("mensajesFavoritos") !== null) {
-    //   setMensajesFavoritos([]);
-    // }
-
     ejecutarCada5Segundos();
   }, []);
 
-  function ejecutarCada5Segundos() {
+  async function ejecutarCada5Segundos() {
     setInterval(() => {
       const randomNumber = Math.floor(Math.random() * sugerencias.length);
       setSugerenciaMostrar(sugerencias[randomNumber]);
@@ -54,9 +49,16 @@ function App() {
   }
 
   async function callOpenAIAPI() {
-    setPreguntasGuardadas([...mensajesGuardados, message]);
-    console.log("Calling the OpenAI API");
-    setResponse("Se está Procesando tu pregunta, espera unos segundos más...");
+    console.log("mensajes:", mensajes);
+    //Mandar mi pregunta al chat
+    const nuevaPregunta = {
+      key: uuidv4(),
+      mensaje: message,
+      tipoMensaje: "pregunta",
+    };
+    // setMensajes([...mensajes, nuevaPregunta]);
+
+    // setResponse("Se está Procesando tu pregunta, espera unos segundos más...");
     setLoading(true);
 
     const APIBody = {
@@ -82,14 +84,17 @@ function App() {
       })
       .then((data) => {
         console.log(data);
-        const nuevoMensaje = {
+        const respuesta = {
           key: uuidv4(),
-          keypregunta: uuidv4(),
           mensaje: data.choices[0].text.trim(),
-          pregunta: message,
-          urlAvatar: localStorage.getItem("urlAvatar"),
+          urlAvatar:
+            "https://th.bing.com/th/id/OIP.1MrXVIq7cDw-lOFQhVQ5YQHaKh?pid=ImgDet&rs=1",
+          tipoMensaje: "respuesta",
         };
-        setMensajesGuardados([...mensajesGuardados, nuevoMensaje]);
+        let arreglo = mensajes;
+        arreglo.push(nuevaPregunta);
+        arreglo.push(respuesta);
+        setMensajes(arreglo);
         setLoading(false);
       });
   }
@@ -110,7 +115,7 @@ function App() {
           alignItems: "center",
         }}
       >
-        {mensajesGuardados == 0 && (
+        {/* {mensajes.length == 0 && (
           <Box
             sx={{
               display: "flex",
@@ -122,17 +127,25 @@ function App() {
             <h2>¡ Chatea Con tus Famosos Favoritos ! </h2>
           </Box>
         )}
-        {mensajesGuardados.map((mensaje) => (
-          <>
-            {console.log("mensajesGuardados>>", mensajesGuardados)}
-            <Pregunta key={mensaje.keypregunta} pregunta={mensaje.pregunta} />
-            <Mensaje
-              key={mensaje.key}
-              mensaje={mensaje.mensaje}
-              urlAvatar={mensaje.urlAvatar}
-            />
-          </>
-        ))}
+        {mensajes.length != 0 &&
+          mensajes.map((mensaje) => (
+            <>
+              {console.log(">>>> mensaje", mensaje)}
+              {mensaje.tipoMensaje == "pregunta" ? (
+                <Pregunta key={mensaje.key} pregunta={mensaje.mensaje} />
+              ) : (
+                <Mensaje
+                  key={mensaje.key}
+                  mensaje={mensaje.mensaje}
+                  urlAvatar={mensaje.urlAvatar}
+                />
+              )}
+            </>
+          ))} */}
+        <Mensaje mensaje={mensajePrueba} />;
+        {mensajes.map((mensaje) => {
+          return <Mensaje mensaje={mensaje} />;
+        })}
       </Box>
       <TextField
         disabled={loading}
@@ -154,4 +167,4 @@ function App() {
   );
 }
 
-export default App;
+export default Principal;

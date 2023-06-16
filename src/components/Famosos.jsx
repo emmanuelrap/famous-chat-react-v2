@@ -1,7 +1,8 @@
 import { Avatar, IconButton, Stack, Toolbar, Tooltip } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Famosos = ({ famosoSel, setFamosoSel }) => {
+  const [isSelected, setIsSelected] = useState(7);
   const famosos = [
     "Albert Einstein",
     "Leonardo da Vinci",
@@ -12,6 +13,7 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
     "Cristiano Ronaldo",
     "Asistente Virtual",
   ];
+
   const urls = [
     "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/800px-Albert_Einstein_Head.jpg",
     "https://www.thefamouspeople.com/profiles/images/leonardo-da-vinci-6.jpg",
@@ -22,15 +24,15 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
     "https://th.bing.com/th/id/OIP.1MrXVIq7cDw-lOFQhVQ5YQHaKh?pid=ImgDet&rs=1",
     "https://th.bing.com/th/id/OIP.syWIXHRKFwrWClHE6z9i9QHaEK?pid=ImgDet&rs=1",
   ];
-  //   localStorage.setItem("famoso", famosos[0]);
-  //   localStorage.setItem("urlAvatar", urls[0]);
-  // setFamosoSel({ famoso: famosos[0], urlAvatar: urls[0] });
 
-  const [isSelected, setIsSelected] = useState(7);
+  useEffect(() => {
+    setFamosoSel({ nombre: famosos[0], urlAvatar: urls[0] });
+  }, []);
+
   const handleClick = (seleccion) => {
-    // localStorage.setItem("famoso", famosos[seleccion]);
+    // localStorage.setItem("nombre", famosos[seleccion]);
     // localStorage.setItem("urlAvatar", urls[seleccion]);
-    //setFamosoSel({ famoso: famosos[seleccion], urlAvatar: urls[seleccion] });
+    setFamosoSel({ nombre: famosos[seleccion], urlAvatar: urls[seleccion] });
     setIsSelected(seleccion);
   };
   // 0 Albert Einstein
