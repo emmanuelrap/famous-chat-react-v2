@@ -33,7 +33,7 @@ function Principal({ famosoSel }) {
   const [message, setMessage] = useState("");
   const [mensajes, setMensajes] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [tipoResp, setTipoRes] = useState("Respuesta Rápida");
+  const [tipoResp, setTipoRes] = useState("Respuesta Detallada");
   const [tipoModelo, setTipoModelo] = useState("text-davinci-002");
   const [configOpen, setConfigOpen] = React.useState(false);
   const [nivelRespuesta, setNivelRespuesta] = React.useState(1.0);
