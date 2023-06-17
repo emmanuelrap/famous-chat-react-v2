@@ -3,21 +3,18 @@ import { v4 as uuidv4 } from "uuid";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import InputAdornment from "@mui/material/InputAdornment";
-import Zoom from "@mui/material/Zoom";
-
 import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 import {
-  Tooltip,
   Box,
   CircularProgress,
+  Slider,
   Switch,
   TextField,
   ToggleButton,
   ToggleButtonGroup,
+  Tooltip,
   Typography,
-  Slider,
-  Stack,
 } from "@mui/material";
 import Mensaje from "./Mensaje";
 import Pregunta from "./Pregunta";
@@ -36,11 +33,6 @@ function Principal({ famosoSel }) {
   const [tipoResp, setTipoRes] = useState("Respuesta Rápida");
   const [tipoModelo, setTipoModelo] = useState("text-davinci-002");
   const [configOpen, setConfigOpen] = React.useState(false);
-  const [nivelRespuesta, setNivelRespuesta] = React.useState(1.0);
-
-  const [sugerenciaMostrar, setSugerenciaMostrar] = useState(
-    "Escribe aquí lo que quieras decirme..."
-  );
 
   const [mensajesFavoritos, setMensajesFavoritos] = useState([]);
 
@@ -52,23 +44,39 @@ function Principal({ famosoSel }) {
     "¿No sabes que película ver? ¡Pídeme Sugerencias!",
     "¿Estas a dieta? Pídeme consejos",
     "Pideme una receta de cocina",
-    "  ¿Te digo que puedes hacer con tus ingredientes que tienes a la mano?",
+    " ¿Te digo que puedes hacer con tus ingredientes que tienes a la mano?",
   ];
+
+  const [sugerenciaMostrar, setSugerenciaMostrar] = useState("");
 
   useEffect(() => {
     ejecutarCada5Segundos();
   }, []);
 
   async function ejecutarCada5Segundos() {
-    if (message == "") {
-      setInterval(() => {
-        const randomNumber = Math.floor(Math.random() * sugerencias.length);
-        setSugerenciaMostrar(sugerencias[randomNumber]);
-      }, 8000);
+    setInterval(() => {
+      const randomNumber = Math.floor(Math.random() * sugerencias.length);
+      setSugerenciaMostrar(sugerencias[randomNumber]);
+    }, 4000);
+  }
+  async function handleChangeTypeResp() {
+    if (tipoResp == "Respuesta Detallada") {
+      setTipoRes("Respuesta Rápida");
+      setTipoModelo("text-davinci-002");
+    } else {
+      setTipoRes("Respuesta Detallada");
+      setTipoModelo("text-davinci-003");
     }
   }
 
-  async function setOpenIA() {
+  const handleCloseConfig = () => {
+    setConfigOpen(false);
+  };
+  const handleSend = () => {
+    console.log("Valor del input:", tipoResp);
+  };
+
+  async function callOpenAIAPI() {
     console.log("mensajes:", mensajes);
     //Mandar mi pregunta al chat
     const nuevaPregunta = {
@@ -88,13 +96,11 @@ function Principal({ famosoSel }) {
         famosoSel.nombre +
         ":" +
         message,
-      temperature: nivelRespuesta,
+      temperature: 0,
       max_tokens: 300,
-      top_p: nivelRespuesta,
-      //+Variabilidad -Certeza
-      frequency_penalty: 0.9,
-      //+Originalidad -Enfoque
-      presence_penalty: 0.5,
+      top_p: 1.0,
+      frequency_penalty: 0.0,
+      presence_penalty: 0.0,
     };
 
     await fetch("https://api.openai.com/v1/completions", {
@@ -121,56 +127,36 @@ function Principal({ famosoSel }) {
         arreglo.push(respuesta);
         setMensajes(arreglo);
         setLoading(false);
-        setMessage("");
       });
   }
-
-  //---------- H A N D L E S -----------//
   const handleOpenConfig = () => {
     setConfigOpen(true);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      setOpenIA();
+      handleSend();
     }
   };
-  const handleCloseConfig = () => {
-    setConfigOpen(false);
-  };
-  const handleChangeSlider = (event, value) => {
-    let nivel = value / 10;
-    setNivelRespuesta(nivel);
-  };
-  async function handleChangeTypeResp() {
-    if (tipoResp == "Respuesta Detallada") {
-      setTipoRes("Respuesta Rápida");
-      setTipoModelo("text-davinci-002");
-    } else {
-      setTipoRes("Respuesta Detallada");
-      setTipoModelo("text-davinci-003");
-    }
-  }
 
   return (
-    <Box sx={{ width: "100%", height: "100%" }}>
+    <Box sx={{ width: "90%", height: "100%", mr: 10 }}>
       <Box
         sx={{
           overflow: "auto",
           "&::-webkit-scrollbar": { display: "none" },
           padding: 2,
-          width: "95%",
+          width: "100%",
           height: "80%",
-          border: 2, // Grosor del borde en píxeles
-          BorderColor: "white", // Color del borde
+          border: 2,
+          borderColor: "white",
           borderRadius: 5,
-          mr: 0,
-
+          mr: 15,
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        {mensajes.length == 0 && (
+        {mensajes.length === 0 && (
           <Box
             sx={{
               display: "flex",
@@ -179,23 +165,22 @@ function Principal({ famosoSel }) {
               height: "80vh",
             }}
           >
-            <Stack sx={{ alignItems: "center" }}>
-              <h1>¿Con quien quieres Chatear?</h1>
-
-              <h3>Who do you want to chat with? </h3>
-            </Stack>
+            <h2>¡Chatea Con tus Famosos Favoritos!</h2>
           </Box>
         )}
 
         {mensajes.map((mensaje) => {
-          if (mensaje.tipoMensaje == "pregunta")
+          if (mensaje.tipoMensaje === "pregunta") {
             return <Pregunta mensaje={mensaje} />;
-          else return <Mensaje mensaje={mensaje} />;
+          } else {
+            return <Mensaje mensaje={mensaje} />;
+          }
         })}
       </Box>
+
       <TextField
         disabled={loading}
-        sx={{ width: "90%", mx: 0, mt: 1, ml: 5 }}
+        sx={{ width: "100%", mx: 0, mt: 1, ml: 2.5 }}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder={sugerenciaMostrar}
@@ -203,7 +188,6 @@ function Principal({ famosoSel }) {
           endAdornment: (
             <InputAdornment position="end">
               <Tooltip
-                TransitionComponent={Zoom}
                 open={configOpen}
                 onClose={handleCloseConfig}
                 disableFocusListener
@@ -224,25 +208,20 @@ function Principal({ famosoSel }) {
                         <CloseIcon />
                       </IconButton>
                     </Box>
-                    <Tooltip
-                      title="A mayor nivel más diversidad y Creatividad, a menor nivel Mas coherencia y Certividad"
-                      sx={{ fontSize: "20px" }}
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ marginBottom: "10px" }}
                     >
-                      <Typography
-                        variant="body1"
-                        sx={{ marginBottom: "10px", ml: 2, mb: -0.6 }}
-                      >
-                        Nivel de Respuesta
-                      </Typography>
-                    </Tooltip>
+                      Configurar parámetros
+                    </Typography>
+                    <Typography variant="body1" sx={{ marginBottom: "10px" }}>
+                      Volumen
+                    </Typography>
                     <Box width={200}>
                       <Slider
                         defaultValue={10}
                         aria-label="Default"
                         valueLabelDisplay="auto"
-                        min={1}
-                        max={10}
-                        onChange={handleChangeSlider}
                       />
                     </Box>
                     <FormControlLabel
@@ -253,28 +232,17 @@ function Principal({ famosoSel }) {
                 }
                 arrow
               >
-                <Tooltip title="IA Settings">
-                  <IconButton edge="end" onClick={handleOpenConfig}>
-                    <SettingsIcon style={{ fontSize: 30 }} />
-                  </IconButton>
-                </Tooltip>
+                <IconButton edge="end" onClick={handleOpenConfig}>
+                  <SettingsIcon />
+                </IconButton>
               </Tooltip>
-              {/*  */}
-              <IconButton
-                edge="end"
-                onClick={setOpenIA}
-                disabled={loading || message == ""}
-                sx={{ ml: 1, mr: 0.5 }}
-              >
-                {loading ? (
-                  <CircularProgress size={25} />
-                ) : (
-                  <SendIcon style={{ fontSize: 30 }} />
-                )}
+              <IconButton edge="end" onClick={handleSend} disabled={loading}>
+                <SendIcon />
               </IconButton>
             </InputAdornment>
           ),
         }}
+        onKeyDown={handleKeyDown}
       />
     </Box>
   );
