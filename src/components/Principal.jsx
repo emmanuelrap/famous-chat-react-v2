@@ -194,6 +194,7 @@ function Principal({ famosoSel }) {
         })}
       </Box>
       <TextField
+        onKeyDown={handleKeyDown}
         disabled={loading}
         sx={{ width: "90%", mx: 0, mt: 1, ml: 5 }}
         value={message}
