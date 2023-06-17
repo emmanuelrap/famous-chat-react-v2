@@ -121,7 +121,6 @@ function Principal({ famosoSel }) {
         arreglo.push(respuesta);
         setMensajes(arreglo);
         setLoading(false);
-        setMessage("");
       });
   }
 
@@ -151,6 +150,10 @@ function Principal({ famosoSel }) {
       setTipoModelo("text-davinci-003");
     }
   }
+
+  const handleBorrar = () => {
+    setMessage("");
+  };
 
   return (
     <Box sx={{ width: "100%", height: "100%" }}>
@@ -201,6 +204,13 @@ function Principal({ famosoSel }) {
         onChange={(e) => setMessage(e.target.value)}
         placeholder={sugerenciaMostrar}
         InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <IconButton edge="start" onClick={handleBorrar}>
+                <CloseIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
           endAdornment: (
             <InputAdornment position="end">
               <Tooltip
