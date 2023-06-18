@@ -68,17 +68,69 @@ function Principal({ famosoSel }) {
     }
   }
 
-  async function setOpenIA() {
-    console.log("mensajes:", mensajes);
+  async function TurboOpenIA() {
     //Mandar mi pregunta al chat
     const nuevaPregunta = {
       key: uuidv4(),
-      mensaje: message,
+      content: message,
       tipoMensaje: "pregunta",
+      role: "user",
     };
     setMensajes([...mensajes, nuevaPregunta]);
+    setLoading(true);
 
-    // setResponse("Se está Procesando tu pregunta, espera unos segundos más...");
+    let allMessages = [];
+
+    mensajes.map((mensaje) => {
+      let obj = { role: mensaje.role, content: mensaje.content };
+      allMessages.push(obj);
+    });
+    //Ingresamos la pregunta actual
+    let obj = { role: nuevaPregunta.role, content: nuevaPregunta.content };
+    allMessages.push(obj);
+
+    const apiRequestBody = {
+      model: "gpt-3.5-turbo",
+      messages: allMessages,
+    };
+
+    await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + API_KEY,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(apiRequestBody),
+    })
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        //console.log("Respuesta:", data);data.choices[0].message.content;
+        const respuesta = {
+          key: uuidv4(),
+          content: data.choices[0].message.content,
+          urlAvatar: famosoSel.urlAvatar,
+          tipoMensaje: "respuesta",
+          role: "system",
+        };
+        let arreglo = mensajes;
+        arreglo.push(nuevaPregunta);
+        arreglo.push(respuesta);
+        setMensajes(arreglo);
+        setLoading(false);
+      });
+  }
+
+  async function OpenIA() {
+    //Mandar mi pregunta al chat
+    const nuevaPregunta = {
+      key: uuidv4(),
+      content: message,
+      tipoMensaje: "pregunta",
+      role: "user",
+    };
+    setMensajes([...mensajes, nuevaPregunta]);
     setLoading(true);
 
     const APIBody = {
@@ -112,9 +164,10 @@ function Principal({ famosoSel }) {
         console.log(data);
         const respuesta = {
           key: uuidv4(),
-          mensaje: data.choices[0].text.trim(),
+          content: data.choices[0].text.trim(),
           urlAvatar: famosoSel.urlAvatar,
           tipoMensaje: "respuesta",
+          role: "system",
         };
         let arreglo = mensajes;
         arreglo.push(nuevaPregunta);
@@ -131,7 +184,7 @@ function Principal({ famosoSel }) {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      setOpenIA();
+      OpenIA();
     }
   };
   const handleCloseConfig = () => {
@@ -190,10 +243,10 @@ function Principal({ famosoSel }) {
           </Box>
         )}
 
-        {mensajes.map((mensaje) => {
-          if (mensaje.tipoMensaje == "pregunta")
-            return <Pregunta mensaje={mensaje} />;
-          else return <Mensaje mensaje={mensaje} />;
+        {mensajes.map((content) => {
+          if (content.tipoMensaje == "pregunta")
+            return <Pregunta content={content} />;
+          else return <Mensaje content={content} />;
         })}
       </Box>
       <TextField
@@ -248,7 +301,7 @@ function Principal({ famosoSel }) {
                     </Tooltip>
                     <Box width={200}>
                       <Slider
-                        defaultValue={10}
+                        defaultValue={5}
                         aria-label="Default"
                         valueLabelDisplay="auto"
                         min={1}
@@ -273,7 +326,7 @@ function Principal({ famosoSel }) {
               {/*  */}
               <IconButton
                 edge="end"
-                onClick={setOpenIA}
+                onClick={TurboOpenIA}
                 disabled={loading || message == ""}
                 sx={{ ml: 1, mr: 0.5 }}
               >

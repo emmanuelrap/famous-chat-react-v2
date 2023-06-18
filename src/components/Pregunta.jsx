@@ -18,7 +18,7 @@ import React from "react";
 //   },
 // }));
 
-const Pregunta = ({ mensaje }) => {
+const Pregunta = ({ content }) => {
   return (
     // <Paper className={classes.box}>
     <Box>
@@ -46,7 +46,7 @@ const Pregunta = ({ mensaje }) => {
               backgroundColor: "#E0E0E0", // Ajusta el color de fondo según tus preferencias
             }}
           >
-            {mensaje.mensaje}
+            {content.content}
           </Typography>
         </Box>
       </Stack>

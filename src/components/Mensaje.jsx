@@ -18,8 +18,8 @@ import React from "react";
 //   },
 // }));
 
-const Mensaje = ({ mensaje }) => {
-  // console.log("El mensaje de Mensaje es:", mensaje);
+const Mensaje = ({ content }) => {
+  // console.log("El content de Mensaje es:", content);
   //   const classes = useStyles();
 
   return (
@@ -41,10 +41,10 @@ const Mensaje = ({ mensaje }) => {
               backgroundColor: "#E0E0E0", // Ajusta el color de fondo según tus preferencias
             }}
           >
-            {mensaje.mensaje}
+            {content.content}
           </Typography>
         </Box>
-        <Avatar src={mensaje.urlAvatar} sx={{ mx: 1, my: "auto" }}></Avatar>
+        <Avatar src={content.urlAvatar} sx={{ mx: 1, my: "auto" }}></Avatar>
       </Stack>
 
       <br />
