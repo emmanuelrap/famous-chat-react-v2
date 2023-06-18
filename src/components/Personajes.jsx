@@ -9,7 +9,7 @@ import {
 import React, { useEffect, useState } from "react";
 
 const Personajes = ({ famosoSel, setFamosoSel }) => {
-  const [isSelected, setIsSelected] = useState(0);
+  const [isSelected, setIsSelected] = useState();
   const famosos = [
     "Doctor muy viejito",
     "una persona muy Loca con malas intensiones hacia mí",
@@ -55,14 +55,12 @@ const Personajes = ({ famosoSel, setFamosoSel }) => {
       sx={{
         overflow: "auto",
         "&::-webkit-scrollbar": { display: "none" },
-
+        p: 1,
+        ml: -4,
         width: "5rem",
-        height: "35rem",
-        border: 2, // Grosor del borde en píxeles
-        BorderColor: "white", // Color del borde
-        borderRadius: 10,
+        height: "23.5rem",
+
         mb: "10rem",
-        ml: "0.7rem",
 
         justifyContent: "center",
         alignItems: "center",
@@ -78,7 +76,7 @@ const Personajes = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Doctor">
           <Avatar
-            sx={{ width: 50, height: 50 }}
+            sx={{ width: 60, height: 60 }}
             src="https://www.topdoctors.es/files/Doctor/profile/prof_4912_20200610093808.png"
           />
         </Tooltip>
@@ -94,7 +92,7 @@ const Personajes = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Persona No Cuerda">
           <Avatar
-            sx={{ width: 50, height: 50 }}
+            sx={{ width: 60, height: 60 }}
             src="https://3.bp.blogspot.com/-F1lgMl1B3r8/Wh-G-QX3zTI/AAAAAAAACYw/rZfbVBcqoaUiLPKr-TJQiXWoMzrlqicaQCLcBGAs/s1600/1917.mt1.jpg"
           />
         </Tooltip>
@@ -109,7 +107,7 @@ const Personajes = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Chica Enamorada">
           <Avatar
-            sx={{ width: 50, height: 50 }}
+            sx={{ width: 60, height: 60 }}
             src="https://media.istockphoto.com/id/1276933115/es/vector/mujer-chica-enamorada-de-corazones-sobre-un-fondo-rosa-ilustraci%C3%B3n-del-d%C3%ADa-de-san-valent%C3%ADn.jpg?s=612x612&w=0&k=20&c=6Ke1Ldiy-YxBQ0sobeRZlQyHyT20VPbOTZUu-9bhEkE="
           />
         </Tooltip>
@@ -124,7 +122,7 @@ const Personajes = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Mi mamá">
           <Avatar
-            sx={{ width: 50, height: 50 }}
+            sx={{ width: 60, height: 60 }}
             src="https://i0.wp.com/dialoguemos.ec/wp-content/uploads/2022/05/75092094_m.jpg?fit=1336%2C1024&ssl=1"
           />
         </Tooltip>
@@ -139,7 +137,7 @@ const Personajes = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Perro Hablador">
           <Avatar
-            sx={{ width: 50, height: 50 }}
+            sx={{ width: 60, height: 60 }}
             src="https://img.freepik.com/vector-gratis/lindo-perro-sacando-lengua-ilustracion-icono-dibujos-animados_138676-2709.jpg?w=2000"
           />
         </Tooltip>
@@ -154,7 +152,7 @@ const Personajes = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Genio de la Lámpara">
           <Avatar
-            sx={{ width: 50, height: 50 }}
+            sx={{ width: 60, height: 60 }}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR54uUbDEeO7mArCU5Q-5CNCyJmxfucedSXlQ&usqp=CAU"
           />
         </Tooltip>
@@ -169,7 +167,7 @@ const Personajes = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Rey">
           <Avatar
-            sx={{ width: 50, height: 50 }}
+            sx={{ width: 60, height: 60 }}
             src="https://elcomercio.pe/resizer/9rMkni0OutVQ50LN9_w24zWUoDA=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/F3ZZGFEPUFHEREJJTKHB7Z4NWI.jpg"
           />
         </Tooltip>
@@ -184,7 +182,7 @@ const Personajes = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Espartano">
           <Avatar
-            sx={{ width: 50, height: 50 }}
+            sx={{ width: 60, height: 60 }}
             src="https://www.cambiatufisico.com/wp-content/uploads/entrenamiento-spartano.jpg"
           />
         </Tooltip>
