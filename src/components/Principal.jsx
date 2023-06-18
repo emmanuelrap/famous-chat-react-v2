@@ -13,8 +13,6 @@ import {
   CircularProgress,
   Switch,
   TextField,
-  ToggleButton,
-  ToggleButtonGroup,
   Typography,
   Slider,
   Stack,
@@ -24,7 +22,6 @@ import Pregunta from "./Pregunta";
 const API_KEY = import.meta.env.VITE_API_KEY;
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { styled } from "@mui/system";
-
 const StyledLabel = styled("span")({
   marginRight: "0.5rem",
 });
@@ -41,8 +38,6 @@ function Principal({ famosoSel }) {
   const [sugerenciaMostrar, setSugerenciaMostrar] = useState(
     "Escribe aquí lo que quieras decirme..."
   );
-
-  const [mensajesFavoritos, setMensajesFavoritos] = useState([]);
 
   const sugerencias = [
     "Hazme una Pregunta.",
