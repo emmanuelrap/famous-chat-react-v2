@@ -3,6 +3,7 @@ import { Box, CircularProgress, TextField } from "@mui/material";
 
 import Principal from "./components/Principal";
 import Famosos from "./components/Famosos";
+import Personajes from "./components/Personajes";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -15,8 +16,9 @@ function App() {
   return (
     <Box
       sx={{
+        mt: "2rem",
         width: "95%",
-        height: "97vh",
+        height: "95vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -24,6 +26,7 @@ function App() {
     >
       <Famosos setFamosoSel={setFamosoSel} />
       <Principal famosoSel={famosoSel} />
+      <Personajes setFamosoSel={setFamosoSel} />
     </Box>
   );
 }

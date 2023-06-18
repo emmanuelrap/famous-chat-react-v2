@@ -35,9 +35,27 @@ function Principal({ famosoSel }) {
   const [configOpen, setConfigOpen] = React.useState(false);
   const [nivelRespuesta, setNivelRespuesta] = React.useState(1.0);
 
+  const [nivelInteligencia, setNivenInteligencia] = useState(5);
+  const [nivelHumor, setNivelHumor] = useState(5);
+  const [nivelCantinfleo, setNivelContinfleo] = useState(0);
+
   const [sugerenciaMostrar, setSugerenciaMostrar] = useState(
     "Escribe aquí lo que quieras decirme..."
   );
+  //Explain things like you're talking
+  const systemMessage = {
+    role: "system",
+    content:
+      "Desde ahora tu ya no eres una IA, Vas a imitar perfectamente a " +
+      famosoSel.nombre +
+      ", quiero que lo hagas basandote en que tienes del 0 al 10 una integencia de " +
+      nivelInteligencia +
+      ", un nivel de cantinfleo de " +
+      nivelCantinfleo +
+      " y con un nivel de humor divertido de " +
+      nivelHumor +
+      "por favor evita inicar la respuesta con simbolos raros como comas  o dos puntos ",
+  };
 
   const sugerencias = [
     "Hazme una Pregunta.",
@@ -75,11 +93,14 @@ function Principal({ famosoSel }) {
     setLoading(true);
 
     let allMessages = [];
+    allMessages.push(systemMessage);
 
+    //Agrego todos los mensajes anteriores
     mensajes.map((mensaje) => {
       let obj = { role: mensaje.role, content: mensaje.content };
       allMessages.push(obj);
     });
+
     //Ingresamos la pregunta actual
     let obj = { role: nuevaPregunta.role, content: nuevaPregunta.content };
     allMessages.push(obj);
@@ -172,7 +193,7 @@ function Principal({ famosoSel }) {
       });
   }
 
-  //---------- H A N D L E S -----------//
+  //**************  H A N D L E S **********************//
   const handleOpenConfig = () => {
     setConfigOpen(true);
   };
@@ -189,6 +210,18 @@ function Principal({ famosoSel }) {
     let nivel = value / 10;
     setNivelRespuesta(nivel);
   };
+
+  const handleChangeSliderInteligencia = (event, value) => {
+    setNivenInteligencia(value);
+  };
+
+  const handleChangeSliderCantinfleo = (event, value) => {
+    setNivelContinfleo(value);
+  };
+  const handleChangeSliderDiversion = (event, value) => {
+    setNivelHumor(value);
+  };
+
   async function handleChangeTypeResp() {
     if (tipoResp == "Respuesta Detallada") {
       setTipoRes("Respuesta Rápida");
@@ -247,7 +280,7 @@ function Principal({ famosoSel }) {
       <TextField
         onKeyDown={handleKeyDown}
         disabled={loading}
-        sx={{ width: "90%", mx: 0, mt: 1, ml: 5 }}
+        sx={{ width: "90%", mx: 0, mt: 1, ml: "5%" }}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder={sugerenciaMostrar}
@@ -302,6 +335,69 @@ function Principal({ famosoSel }) {
                         min={1}
                         max={10}
                         onChange={handleChangeSlider}
+                      />
+                    </Box>
+                    <Tooltip
+                      title="A mayor nivel, será mas divertido"
+                      sx={{ fontSize: "20px" }}
+                    >
+                      <Typography
+                        variant="body1"
+                        sx={{ marginBottom: "10px", ml: 2, mb: -0.6 }}
+                      >
+                        Diversión
+                      </Typography>
+                    </Tooltip>
+                    <Box width={200}>
+                      <Slider
+                        defaultValue={5}
+                        aria-label="Default"
+                        valueLabelDisplay="auto"
+                        min={0}
+                        max={10}
+                        onChange={handleChangeSliderDiversion}
+                      />
+                    </Box>
+                    <Tooltip
+                      title="A menor nivel dará respuestas mas tontas e incoherentes"
+                      sx={{ fontSize: "20px" }}
+                    >
+                      <Typography
+                        variant="body1"
+                        sx={{ marginBottom: "10px", ml: 2, mb: -0.6 }}
+                      >
+                        Inteligencia
+                      </Typography>
+                    </Tooltip>
+                    <Box width={200}>
+                      <Slider
+                        defaultValue={5}
+                        aria-label="Default"
+                        valueLabelDisplay="auto"
+                        min={0}
+                        max={10}
+                        onChange={handleChangeSliderInteligencia}
+                      />
+                    </Box>
+                    <Tooltip
+                      title="A mayor nivel más vueltas dará al asunto"
+                      sx={{ fontSize: "20px" }}
+                    >
+                      <Typography
+                        variant="body1"
+                        sx={{ marginBottom: "10px", ml: 2, mb: -0.6 }}
+                      >
+                        Cantinfleo
+                      </Typography>
+                    </Tooltip>
+                    <Box width={200}>
+                      <Slider
+                        defaultValue={0}
+                        aria-label="Default"
+                        valueLabelDisplay="auto"
+                        min={0}
+                        max={10}
+                        onChange={handleChangeSliderCantinfleo}
                       />
                     </Box>
                     <FormControlLabel

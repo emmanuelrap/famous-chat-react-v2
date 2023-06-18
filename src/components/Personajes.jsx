@@ -8,28 +8,28 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-const Famosos = ({ famosoSel, setFamosoSel }) => {
+const Personajes = ({ famosoSel, setFamosoSel }) => {
   const [isSelected, setIsSelected] = useState(0);
   const famosos = [
-    "Albert Einstein",
-    "Leonardo da Vinci",
-    "William Shakespeare",
-    "Nelson Mandela",
-    "Elon Musk",
-    " Beyoncé",
-    "Cristiano Ronaldo",
-    "Asistente Virtual",
+    "Doctor muy viejito",
+    "una persona muy Loca con malas intensiones hacia mí",
+    "Una chica que esta enamorada de mí",
+    "Mi mamá que se preocupa por mí ",
+    "mi perro que sabe hablar, y esta muy feliz de poder hablarme ",
+    "Un genio de la lámpara mágica que me consederá 3 deseos",
+    "Un rey que quiere que sea caballero ",
+    "Un Espartano que esta en la guerra y quiere reclutar gente",
   ];
 
   const urls = [
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/800px-Albert_Einstein_Head.jpg",
-    "https://www.thefamouspeople.com/profiles/images/leonardo-da-vinci-6.jpg",
-    "https://th.bing.com/th/id/OIP.zU_BFHiZmyaENDP4R3j67wHaG3?pid=ImgDet&rs=1",
-    "https://th.bing.com/th/id/OIP.dF3rfgxNpxrZ9cjTPZwhBQHaGo?pid=ImgDet&rs=1",
-    "https://th.bing.com/th/id/R.7e045758f281cb39156cb46e3adf1bc6?rik=LnN%2foHW2A6G3cw&riu=http%3a%2f%2fstatic3.businessinsider.com%2fimage%2f556e35f56bb3f7192014f8a2%2felon-musk-is-so-obsessed-with-hiring-he-wanted-to-poach-the-best-yogurt-shop-employee.jpg&ehk=SIapjMxfRFOissBK%2fSGYUiTqFofszXzzNJdUZoUo%2fvU%3d&risl=&pid=ImgRaw&r=0",
-    " https://th.bing.com/th/id/R.faadb025046614a9b55149bf8ef0b3f5?rik=K0LZLz%2bdYpSAhA&riu=http%3a%2f%2fwallpapersdsc.net%2fwp-content%2fuploads%2f2016%2f01%2fBeyonce-Wallpapers-HD.jpg&ehk=%2fQgci4bbJCO9fEd21317cmv1tMpXaFJY4VAnNZbM1GU%3d&risl=&pid=ImgRaw&r=0",
-    "https://th.bing.com/th/id/OIP.1MrXVIq7cDw-lOFQhVQ5YQHaKh?pid=ImgDet&rs=1",
-    "https://th.bing.com/th/id/OIP.syWIXHRKFwrWClHE6z9i9QHaEK?pid=ImgDet&rs=1",
+    "https://www.topdoctors.es/files/Doctor/profile/prof_4912_20200610093808.png",
+    "https://3.bp.blogspot.com/-F1lgMl1B3r8/Wh-G-QX3zTI/AAAAAAAACYw/rZfbVBcqoaUiLPKr-TJQiXWoMzrlqicaQCLcBGAs/s1600/1917.mt1.jpg",
+    "https://media.istockphoto.com/id/1276933115/es/vector/mujer-chica-enamorada-de-corazones-sobre-un-fondo-rosa-ilustraci%C3%B3n-del-d%C3%ADa-de-san-valent%C3%ADn.jpg?s=612x612&w=0&k=20&c=6Ke1Ldiy-YxBQ0sobeRZlQyHyT20VPbOTZUu-9bhEkE=",
+    "https://i0.wp.com/dialoguemos.ec/wp-content/uploads/2022/05/75092094_m.jpg?fit=1336%2C1024&ssl=1",
+    "https://img.freepik.com/vector-gratis/lindo-perro-sacando-lengua-ilustracion-icono-dibujos-animados_138676-2709.jpg?w=2000",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR54uUbDEeO7mArCU5Q-5CNCyJmxfucedSXlQ&usqp=CAU",
+    "https://elcomercio.pe/resizer/9rMkni0OutVQ50LN9_w24zWUoDA=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/F3ZZGFEPUFHEREJJTKHB7Z4NWI.jpg",
+    "https://www.cambiatufisico.com/wp-content/uploads/entrenamiento-spartano.jpg",
   ];
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
         BorderColor: "white", // Color del borde
         borderRadius: 10,
         mb: "10rem",
-        mr: "0.5rem",
+        ml: "0.7rem",
 
         justifyContent: "center",
         alignItems: "center",
@@ -76,10 +76,10 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
           },
         }}
       >
-        <Tooltip title="Albert Einstein">
+        <Tooltip title="Doctor">
           <Avatar
             sx={{ width: 50, height: 50 }}
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/800px-Albert_Einstein_Head.jpg"
+            src="https://www.topdoctors.es/files/Doctor/profile/prof_4912_20200610093808.png"
           />
         </Tooltip>
       </IconButton>
@@ -92,10 +92,10 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
           },
         }}
       >
-        <Tooltip title="Leonardo da Vinci">
+        <Tooltip title="Persona No Cuerda">
           <Avatar
             sx={{ width: 50, height: 50 }}
-            src="https://www.thefamouspeople.com/profiles/images/leonardo-da-vinci-6.jpg"
+            src="https://3.bp.blogspot.com/-F1lgMl1B3r8/Wh-G-QX3zTI/AAAAAAAACYw/rZfbVBcqoaUiLPKr-TJQiXWoMzrlqicaQCLcBGAs/s1600/1917.mt1.jpg"
           />
         </Tooltip>
       </IconButton>
@@ -107,10 +107,10 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
           },
         }}
       >
-        <Tooltip title=" William Shakespeare">
+        <Tooltip title="Chica Enamorada">
           <Avatar
             sx={{ width: 50, height: 50 }}
-            src="https://th.bing.com/th/id/OIP.zU_BFHiZmyaENDP4R3j67wHaG3?pid=ImgDet&rs=1"
+            src="https://media.istockphoto.com/id/1276933115/es/vector/mujer-chica-enamorada-de-corazones-sobre-un-fondo-rosa-ilustraci%C3%B3n-del-d%C3%ADa-de-san-valent%C3%ADn.jpg?s=612x612&w=0&k=20&c=6Ke1Ldiy-YxBQ0sobeRZlQyHyT20VPbOTZUu-9bhEkE="
           />
         </Tooltip>
       </IconButton>
@@ -122,10 +122,10 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
           },
         }}
       >
-        <Tooltip title="Nelson Mandela">
+        <Tooltip title="Mi mamá">
           <Avatar
             sx={{ width: 50, height: 50 }}
-            src="https://th.bing.com/th/id/OIP.dF3rfgxNpxrZ9cjTPZwhBQHaGo?pid=ImgDet&rs=1"
+            src="https://i0.wp.com/dialoguemos.ec/wp-content/uploads/2022/05/75092094_m.jpg?fit=1336%2C1024&ssl=1"
           />
         </Tooltip>
       </IconButton>
@@ -137,10 +137,10 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
           },
         }}
       >
-        <Tooltip title="Elon Musk">
+        <Tooltip title="Perro Hablador">
           <Avatar
             sx={{ width: 50, height: 50 }}
-            src="https://th.bing.com/th/id/R.7e045758f281cb39156cb46e3adf1bc6?rik=LnN%2foHW2A6G3cw&riu=http%3a%2f%2fstatic3.businessinsider.com%2fimage%2f556e35f56bb3f7192014f8a2%2felon-musk-is-so-obsessed-with-hiring-he-wanted-to-poach-the-best-yogurt-shop-employee.jpg&ehk=SIapjMxfRFOissBK%2fSGYUiTqFofszXzzNJdUZoUo%2fvU%3d&risl=&pid=ImgRaw&r=0"
+            src="https://img.freepik.com/vector-gratis/lindo-perro-sacando-lengua-ilustracion-icono-dibujos-animados_138676-2709.jpg?w=2000"
           />
         </Tooltip>
       </IconButton>
@@ -152,10 +152,10 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
           },
         }}
       >
-        <Tooltip title="Beyoncé">
+        <Tooltip title="Genio de la Lámpara">
           <Avatar
             sx={{ width: 50, height: 50 }}
-            src="https://th.bing.com/th/id/R.faadb025046614a9b55149bf8ef0b3f5?rik=K0LZLz%2bdYpSAhA&riu=http%3a%2f%2fwallpapersdsc.net%2fwp-content%2fuploads%2f2016%2f01%2fBeyonce-Wallpapers-HD.jpg&ehk=%2fQgci4bbJCO9fEd21317cmv1tMpXaFJY4VAnNZbM1GU%3d&risl=&pid=ImgRaw&r=0"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR54uUbDEeO7mArCU5Q-5CNCyJmxfucedSXlQ&usqp=CAU"
           />
         </Tooltip>
       </IconButton>
@@ -167,10 +167,10 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
           },
         }}
       >
-        <Tooltip title="Cristiano Ronaldo">
+        <Tooltip title="Rey">
           <Avatar
             sx={{ width: 50, height: 50 }}
-            src="https://th.bing.com/th/id/OIP.1MrXVIq7cDw-lOFQhVQ5YQHaKh?pid=ImgDet&rs=1"
+            src="https://elcomercio.pe/resizer/9rMkni0OutVQ50LN9_w24zWUoDA=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/F3ZZGFEPUFHEREJJTKHB7Z4NWI.jpg"
           />
         </Tooltip>
       </IconButton>
@@ -182,10 +182,10 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
           },
         }}
       >
-        <Tooltip title="Best IA Assintent">
+        <Tooltip title="Espartano">
           <Avatar
             sx={{ width: 50, height: 50 }}
-            src="https://th.bing.com/th/id/OIP.syWIXHRKFwrWClHE6z9i9QHaEK?pid=ImgDet&rs=1"
+            src="https://www.cambiatufisico.com/wp-content/uploads/entrenamiento-spartano.jpg"
           />
         </Tooltip>
       </IconButton>
@@ -193,4 +193,4 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
   );
 };
 
-export default Famosos;
+export default Personajes;
