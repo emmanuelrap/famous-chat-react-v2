@@ -19,42 +19,37 @@ import React from "react";
 // }));
 
 const Pregunta = ({ content }) => {
-  return (
-    // <Paper className={classes.box}>
-    <Box>
-      <Stack direction="row">
-        <Tooltip title="Tú">
-          <Avatar
-            src={
-              "https://th.bing.com/th/id/OIP.04D0YadWF5JBe1MuS4DxugHaHa?pid=ImgDet&rs=1"
-            }
-            sx={{ mx: 1, my: "auto" }}
-          ></Avatar>
-        </Tooltip>
-        <Box
-          sx={{
-            width: "100%",
-            height: "5%",
-            mr: "15%",
-          }}
-        >
-          <Typography
-            variant="body2"
-            sx={{
-              padding: "8px 16px", // Ajusta el espaciado interno según tus preferencias
-              borderRadius: "12px", // Ajusta el radio de las esquinas redondeadas según tus preferencias
-              backgroundColor: "#E0E0E0", // Ajusta el color de fondo según tus preferencias
-            }}
-          >
-            {content.content}
-          </Typography>
-        </Box>
-      </Stack>
+	return (
+		// <Paper className={classes.box}>
+		<Box>
+			<Stack direction='row'>
+				<Tooltip title='Tú'>
+					<Avatar sx={{ mx: 1, my: "auto" }}></Avatar>
+				</Tooltip>
+				<Box
+					sx={{
+						width: "100%",
+						height: "5%",
+						mr: "15%",
+					}}
+				>
+					<Typography
+						variant='body2'
+						sx={{
+							padding: "8px 16px", // Ajusta el espaciado interno según tus preferencias
+							borderRadius: "12px", // Ajusta el radio de las esquinas redondeadas según tus preferencias
+							backgroundColor: "#E0E0E0", // Ajusta el color de fondo según tus preferencias
+						}}
+					>
+						{content.content}
+					</Typography>
+				</Box>
+			</Stack>
 
-      <br />
-    </Box>
-    // </Paper>
-  );
+			<br />
+		</Box>
+		// </Paper>
+	);
 };
 
 export default Pregunta;
