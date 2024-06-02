@@ -57,11 +57,12 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
         "&::-webkit-scrollbar": { display: "none" },
 
         width: "5rem",
-        height: "24rem",
+        height: "35rem",
         p: 0.5,
 
         mb: "10rem",
         mr: "1%",
+        mt: "5rem",
 
         justifyContent: "center",
         alignItems: "center",
@@ -77,7 +78,7 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Albert Einstein">
           <Avatar
-            sx={{ width: 60, height: 60 }}
+            sx={{ width: 50, height: 50 }}
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/800px-Albert_Einstein_Head.jpg"
           />
         </Tooltip>
@@ -93,7 +94,7 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Leonardo da Vinci">
           <Avatar
-            sx={{ width: 60, height: 60 }}
+            sx={{ width: 50, height: 50 }}
             src="https://www.thefamouspeople.com/profiles/images/leonardo-da-vinci-6.jpg"
           />
         </Tooltip>
@@ -108,7 +109,7 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title=" William Shakespeare">
           <Avatar
-            sx={{ width: 60, height: 60 }}
+            sx={{ width: 50, height: 50 }}
             src="https://th.bing.com/th/id/OIP.zU_BFHiZmyaENDP4R3j67wHaG3?pid=ImgDet&rs=1"
           />
         </Tooltip>
@@ -123,7 +124,7 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Nelson Mandela">
           <Avatar
-            sx={{ width: 60, height: 60 }}
+            sx={{ width: 50, height: 50 }}
             src="https://th.bing.com/th/id/OIP.dF3rfgxNpxrZ9cjTPZwhBQHaGo?pid=ImgDet&rs=1"
           />
         </Tooltip>
@@ -138,7 +139,7 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Elon Musk">
           <Avatar
-            sx={{ width: 60, height: 60 }}
+            sx={{ width: 50, height: 50 }}
             src="https://th.bing.com/th/id/R.7e045758f281cb39156cb46e3adf1bc6?rik=LnN%2foHW2A6G3cw&riu=http%3a%2f%2fstatic3.businessinsider.com%2fimage%2f556e35f56bb3f7192014f8a2%2felon-musk-is-so-obsessed-with-hiring-he-wanted-to-poach-the-best-yogurt-shop-employee.jpg&ehk=SIapjMxfRFOissBK%2fSGYUiTqFofszXzzNJdUZoUo%2fvU%3d&risl=&pid=ImgRaw&r=0"
           />
         </Tooltip>
@@ -153,7 +154,7 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Beyoncé">
           <Avatar
-            sx={{ width: 60, height: 60 }}
+            sx={{ width: 50, height: 50 }}
             src="https://th.bing.com/th/id/R.faadb025046614a9b55149bf8ef0b3f5?rik=K0LZLz%2bdYpSAhA&riu=http%3a%2f%2fwallpapersdsc.net%2fwp-content%2fuploads%2f2016%2f01%2fBeyonce-Wallpapers-HD.jpg&ehk=%2fQgci4bbJCO9fEd21317cmv1tMpXaFJY4VAnNZbM1GU%3d&risl=&pid=ImgRaw&r=0"
           />
         </Tooltip>
@@ -168,7 +169,7 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Cristiano Ronaldo">
           <Avatar
-            sx={{ width: 60, height: 60 }}
+            sx={{ width: 50, height: 50 }}
             src="https://th.bing.com/th/id/OIP.1MrXVIq7cDw-lOFQhVQ5YQHaKh?pid=ImgDet&rs=1"
           />
         </Tooltip>
@@ -183,7 +184,7 @@ const Famosos = ({ famosoSel, setFamosoSel }) => {
       >
         <Tooltip title="Best IA Assintent">
           <Avatar
-            sx={{ width: 60, height: 60 }}
+            sx={{ width: 50, height: 50 }}
             src="https://th.bing.com/th/id/OIP.syWIXHRKFwrWClHE6z9i9QHaEK?pid=ImgDet&rs=1"
           />
         </Tooltip>
